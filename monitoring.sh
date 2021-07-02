@@ -24,7 +24,7 @@ rm -rf temp.tmp
 	echo "*" "LVM Use:" $(if [ $(/usr/sbin/blkid | grep -c '/dev/mapper') -eq 0 ]; then echo "no"; else echo "yes"; fi)
 	echo "*" "Connections TCP:" "$(ss -s | awk '/TCP:/ {print $2}')"
 	echo "*" "User log:" "$(who | wc -l)"
-	echo "*" "Network:" "IP $(hostname -I | awk '{print $1}')" "($(ifconfig | awk '/ether/ {print $2}'))"
+	echo "*" "Network:" "IP $(hostname -I | awk '{print $1}')" "($(ip link show | awk '$1 == "link/ether" {print $2}'))"
 	echo "*" "Sudo:" "$(grep -c 'COMMAND' /var/log/sudo/logs) cmd"
 	echo "\*****************************************************************************/"
 } >> temp.tmp
