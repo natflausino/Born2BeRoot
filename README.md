@@ -1,7 +1,5 @@
 # Born2BeRoot
 
-what APPArmor is;
-
 - Uma máquina virtual (VM) é um programa que simula um ambiente computacional, capaz de executar sistemas operacionais e aplicativos como se fosse uma máquina física.
 
 - CentOS:(Community ENTerprise Operating System) é um sistema mais estavle que o Debian, porque recebe com pouca frequencia atualizações no sistema, considerado mais empresarial. Ele pode ser usado como uso comum, porém, é necessário a adição de repositórios adicionais que não vem ativos por padrão.
@@ -57,7 +55,7 @@ SSH:
 - - (nano /etc/network/interfaces) como eu fiz funcionar
 conectar ssh: ir no ubunto -->
 - ssh [usuario logado]@[ip da VM] -p [porta x]
----- ssh [nbarreir]@[192.168.15.66] -p [4242]
+
 após colocar senha
 na VM usar wall <mensagem> ou sudo wall -n <mensagem>
 - WALL: o comando wall exibe uma mensagem ou o conteudo de um arquivo no terminal de todos os usuarios conectados
