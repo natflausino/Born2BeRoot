@@ -10,66 +10,38 @@
 
 - AppArmor: é um sistema de Controle de Acesso Mandatório (MAC - Mandatory Access Control). O qual restringe a capacidade do usuario de acessar ou executar certos objetos no sistema, sendo arquivos, diretórios, portas TCP/UDP, entre outros. Utilizando o path do objeto para identificar e aplicar as restrições configuradas.
 
-TTY -> é o que habilita a "conversa" com o terminal
-
-Setup:
-- conectar como user : nbarreir;
-- colocar senha com teclado virtual;
-(se eu precisar mostrar como confere as senhas: sudo visudo e nano /etc/pam.d/common-password)
-- mostrar os status do AppArmor: sudo aa-status
-- check that the ufw service: sudo ufw status verbose
-- check that the ssh service: sudo ss -tunlp (preferivel)
-
-USER/USUARIO:
-- sudo awk -F ":" '{print $1}' /etc/passwd --> mostra só a primeira coluna do arquivo. Mostra os usuários.
-- sudo awk -F ":" '{print $1}' /etc/group --> mostra só a primeira coluna do arquivo. Mostra os grupos.
-- adduser <usuario> --> cria um novo usuario com home e tudo
-- userdel -r <usuario> --> detela o usuario, -r deleta todos os arquivos.
-- usermod -l <novo nome usuario> <usuario>
-- groupadd <grupo> -> cria grupo
-- groupdel <grupo> -> deleta grupo
-- gpasswd -a <usuario> <grupo> ->adiciona o usuario no grupo
-- gpasswd -d <usuario> <grupo> ->remove o usuario do grupo
-- getent group <grupo> -> mostra usuarios que estão nesse grupo
-- passwd <usuario> - trocar senha
-
-HOSTNAME AND PARTITIONS:
-- hostnamectl status --> mostra o hostname atual e outras informações
-- hostnamectl set-hostname <novo hostname> --> alterar o hostname
-- mostrar as partições: lsblk;
-
 - LVM: (Gerenciador de volume lógico) é um método de alocação de espaço. O programa cria um bloco que tem a função de disco rígido (mais próximo de um disco dinâmico), o qual armazena grupos de volumes cuja capacidade é configurada pelo usuário.
 
-SUDO:
-- sudo visudo (mostrar se o file /var/log/sudo)
-- cat /var/lof/sudo/logs
+- UFW: é uma ferramenta de configuração de firewall, que é um dispositivo de segurança que confere o trafego de informações, bloqueando ou permitindo dados dependendo das regras configuradas.
 
-UFW:
-- check that the ufw service: sudo ufw status verbose
-	- UFW: é uma ferramenta de configuração de firewall, que é um dispositivo de segurança que confere o trafego de informações, bloqueando ou permitindo dados dependendo das regras configuradas.
-	- sudo ufw allow/deny (porta) -incoming/outgoing
-	- sudo ufw delete <numero da linha a ser deletada>
-
-SSH:
-- check that the ssh service: sudo ss -tunlp
-- - (nano /etc/network/interfaces) como eu fiz funcionar
-conectar ssh: ir no ubunto -->
-- ssh [usuario logado]@[ip da VM] -p [porta x]
-
-após colocar senha
-na VM usar wall <mensagem> ou sudo wall -n <mensagem>
-- WALL: o comando wall exibe uma mensagem ou o conteudo de um arquivo no terminal de todos os usuarios conectados
-SAIR DA CONEXÃO: logout ou exit (no ubunto)
-
-
-mandar arquivo nao precisa conectar na ssh
--> só mandar direto pelo: scp -P [porta] [arquivo] [usuario logado]@[ip da VM]:[diretorio]
-
-SCRIPT/CRON
 - CRON: é um sistema que executa em segundo plano, no qual podendo ser editado e realizar tarefas através de tempo. Podendo agendar comandos para horarios especificos;
-- sudo crontab -e
---> MI H D ME DS <comando> (/minuto /hora /dia /mês /dia da semana)
-* -> representa "todo";
-, -> para colocar mais de um parametro
-- -> para por um intervalo entre valores
-/ -> criar intervalos pré-determinados de tempos.
+
+TTY -> é o que habilita a "conversa" com o terminal
+
+| Comando | Descrição |
+| --- | --- |
+| `lsblk` |  mostrar as partições |
+| `sudo aa-status` | mostrar os status do *AppArmor* |
+| `sudo ufw status verbose` |  check that the *ufw* service |
+| `sudo ss -tunlp` |  check that the *ssh* service |
+| `hostnamectl status` |  mostra o hostname atual e outras informações |
+| `hostnamectl set-hostname <novo hostname>` |  alterar o hostname |
+| `sudo awk -F ":" '{print $1}' /etc/passwd` |  mostra os *usuários* |
+| `sudo awk -F ":" '{print $1}' /etc/group` |  mostra os *grupos* |
+| `adduser <usuario>` |  cria um novo usuario com home e tudo |
+| `userdel -r <usuario>` |  detela o usuario, -r deleta todos os arquivos |
+| `usermod -l <novo nome usuario> <usuario>` |  muda o nome do usuario |
+| `groupadd <grupo>` |  cria grupo |
+| `groupdel <grupo>` |  deleta grupo |
+| `gpasswd -a <usuario> <grupo>` |  adiciona o usuario no grupo |
+| `gpasswd -d <usuario> <grupo>` |  remove o usuario do grupo |
+| `getent group <grupo>` |  mostra usuarios que estão nesse grupo |
+| `passwd <usuario>` |  trocar senha |
+| `sudo visudo` |  entra para poder edita o arquivo /etc/sudoers |
+| `sudo ufw allow/deny <porta>` | dar acesso/tirar acesso da porta |
+| `sudo ufw delete <numero da linha a ser deletada>` |  deletar linha de acesso a alguma porta |
+| `ssh [usuario logado]@[ip da VM] -p [porta x]` |  como conectar o terminal do seu computador com a VM |
+| `scp -P [porta] [arquivo] [usuario logado]@[ip da VM]:[diretorio]` |  mandar arquivos do seu computador para a VM via terminal |
+| `wall` ou `wall -n` |  exibe uma mensagem ou o conteudo de um arquivo no terminal de todos os usuarios conectados |
+| `exit` ou `logout` |  terminar conexão do seu computador com a VM |
+| `sudo crontab -e` |  editar o arquivo CRON |
