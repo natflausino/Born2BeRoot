@@ -1,4 +1,4 @@
-# Born2BeRoot
+# Born2BeRoot <img src="https://badge42.herokuapp.com/api/project/nbarreir/Born2beroot" align=right>
 
 - Uma máquina virtual (VM) é um programa que simula um ambiente computacional, capaz de executar sistemas operacionais e aplicativos como se fosse uma máquina física.
 
